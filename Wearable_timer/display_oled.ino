@@ -3,9 +3,12 @@ bool flash_text = 0;
 
 ///rhythm, read, rush, release 
 void display_time(){
+
+  display.clearDisplay();
   int digit1;
   int digit2;
-  
+
+  display.setTextSize(2);
   display.setTextColor(SSD1306_BLACK, SSD1306_WHITE); // Draw 'inverse' text
 
   if (mode == 1){
@@ -27,6 +30,7 @@ void display_time(){
   }
 
   else if (mode == 2){
+    
     if (flash_text == 0){
       display.setCursor(5, 16);
       display.println("   ");
@@ -86,6 +90,7 @@ void display_time(){
   }
 
   display.setTextColor(SSD1306_WHITE);
+  display.setTextSize(2);
 
   digit1 = int(timeRhythm);
   digit2 = int(timeRhythm*10)%10;
@@ -149,7 +154,49 @@ void display_time(){
     display.println(" ");
   }
 
+  //display battery level
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  
+  if (bat_level>4.0){
+    display.setCursor(120, 5);
+    display.println("-");
+    display.setCursor(120, 10);
+    display.println("-");
+    display.setCursor(120, 15);
+    display.println("-");
+    display.setCursor(120, 20);
+    display.println("-");
+  }
 
+  else if (bat_level > 3.8){
+    
+    display.setCursor(120, 10);
+    display.println("-");
+    display.setCursor(120, 15);
+    display.println("-");
+    display.setCursor(120, 20);
+    display.println("-");
+  }
+
+  else if (bat_level > 3.7){
+    
+    display.setCursor(120, 15);
+    display.println("-");
+    display.setCursor(120, 20);
+    display.println("-");
+  }
+
+  else {
+    
+    display.setCursor(120, 20);
+    display.println("-");
+  }
+  display.setCursor(120, 28);
+    display.println("B");
+
+  display.setCursor(100, 35);
+    display.println(bat_level);
   display.display();
 }
 

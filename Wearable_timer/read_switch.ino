@@ -1,3 +1,4 @@
+
 void read_switch(){
   if (digitalRead(oneBtn) == 0){
     mode = 1;
@@ -86,6 +87,20 @@ void read_switch(){
   else if (digitalRead(startBtn) == 0){
     mode = 0;
     last_active_time = millis();
+
+    tempRhythm = timeRhythm;
+    tempRead = timeRead;
+    tempRush = timeRush;
+    tempRelease = timeRelease;
+
+    timerRun();
+
+    timeRhythm = tempRhythm;
+    timeRead = tempRead;
+    timeRush = tempRush;
+    timeRelease = tempRelease;
+
+    
     delay(100);
   }
 }
